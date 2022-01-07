@@ -13,6 +13,12 @@ define("CSS_URL", rtrim($_SERVER["SCRIPT_NAME"], "index.php") . "static/css/");
 $path = isset($_SERVER["PATH_INFO"]) ? trim($_SERVER["PATH_INFO"], "/") : "";
 
 $urls = [
+     "/^login$/" => function ($method){
+        ItemController::login();
+    },
+    "/^register$/" => function ($method){
+        ItemController::register();
+    },
     "/^items$/" => function ($method) {
         ItemController::index();
     },
@@ -44,7 +50,7 @@ $urls = [
         echo "$id, $val, $num";
     },
     "/^$/" => function () {
-        ViewHelper::redirect(BASE_URL . "items");
+        ViewHelper::redirect(BASE_URL . "register");
     },
     # REST API
     "/^api\/items\/(\d+)$/" => function ($method, $id) {

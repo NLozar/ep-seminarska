@@ -1,3 +1,4 @@
+drop database if exists bookstore;
 drop database if exists onlinestore;
 create database onlinestore;
 use onlinestore;
@@ -42,6 +43,7 @@ CREATE TABLE users (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
+    onlyBuyer int,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 

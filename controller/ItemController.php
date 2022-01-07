@@ -4,7 +4,15 @@ require_once("model/StoreDB.php");
 require_once("ViewHelper.php");
 
 class ItemController {
-
+    
+    public static function register() {
+        echo ViewHelper::render ("view/register.php");
+    }
+    
+    public static function login() {
+        echo ViewHelper::render ("view/login.php");
+    }
+    
     public static function get($id) {
         echo ViewHelper::render("view/item-detail.php", StoreDB::get(["id" => $id]));
     }
