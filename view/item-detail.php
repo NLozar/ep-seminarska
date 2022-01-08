@@ -29,9 +29,11 @@ else {
 
 <?php
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-    echo "[";
-    echo "<a href=\"./edit\">Edit item</a>";
-    echo "]";
+    if ($_SESSION["username"] === $author) {
+        echo "[";
+        echo "<a href=\"./edit/$id\">Edit item</a>";
+        echo "]";
+    }
 }
 
 ?>

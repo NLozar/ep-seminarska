@@ -13,8 +13,8 @@
 
 <form action="<?= BASE_URL . "items/edit/" . $id ?>" method="post">
     <input type="hidden" name="id" value="<?= $id ?>"  />
-    <p><label>Author: <input type="text" name="author" value="<?= $author ?>" autofocus /></label></p>
-    <p><label>Title: <input type="text" name="title" value="<?= $title ?>" /></label></p>
+    <!--p><label-->Author: <input type="hidden" name="author" value="<?= $author ?>"/><!--/label></p-->
+    <p><label>Title: <input type="text" name="title" value="<?= $title ?>" autofocus/></label></p>
     <p><label>Price: <input type="number" name="price" value="<?= $price ?>" /></label></p>
     <p><label>Description: <br/><textarea name="description" cols="70" rows="10"><?= $description ?></textarea></label></p>
     <p><button>Update record</button></p>

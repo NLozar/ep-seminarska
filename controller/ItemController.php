@@ -17,7 +17,7 @@ class ItemController {
         $_SESSION["loggedin"] = false;
         unset($_SESSION["loggedin"]);
         session_destroy();
-        header("location: items");
+        header("location: ../items");
         echo ViewHelper::render("view/item-list.php", ["items" => StoreDB::getAll()]);
     }
 

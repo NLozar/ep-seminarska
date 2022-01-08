@@ -13,7 +13,7 @@ define("CSS_URL", rtrim($_SERVER["SCRIPT_NAME"], "index.php") . "static/css/");
 $path = isset($_SERVER["PATH_INFO"]) ? trim($_SERVER["PATH_INFO"], "/") : "";
 
 $urls = [
-    "/^logout$/" => function ($method) {
+    "/logout$/" => function ($method) {
         ItemController::logout();
     },
     "/^login$/" => function ($method){
