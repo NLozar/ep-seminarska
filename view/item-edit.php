@@ -9,7 +9,7 @@
 <p>[
     <a href="<?= BASE_URL . "items" ?>">All Items</a> |
     <a href="<?= BASE_URL . "items/add" ?>">Add new</a>
-    ]</p>
+]</p>
 
 <form action="<?= BASE_URL . "items/edit/" . $id ?>" method="post">
     <input type="hidden" name="id" value="<?= $id ?>"  />

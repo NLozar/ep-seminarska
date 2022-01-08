@@ -21,7 +21,7 @@ else {
 ?>
 
 <ul>
-    <li>Author: <b><?= $author ?></b></li>
+    <li>Seller: <b><?= $author ?></b></li>
     <li>Title: <b><?= $title ?></b></li>
     <li>Price: <b><?= $price ?> EUR</b></li>
     <li>Description: <i><?= $description ?></i></li>

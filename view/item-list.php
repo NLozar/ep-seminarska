@@ -24,9 +24,22 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
 
 <ul>
 
-    <?php foreach ($items as $item): ?>
+    <?php
+    if (!isset($_SESSION["loggedin"]) || $_SESSION["typeOfUser"] == 'B'):
+    foreach ($items as $item): ?>
         <li><a href="<?= BASE_URL . "items/" . $item["id"] ?>"><?= $item["author"] ?>: 
         	<?= $item["title"] ?> </a></li>
-    <?php endforeach; ?>
+    <?php endforeach; endif;?>
+    
+    <?php
+    if (isset($_SESSION["loggedin"]) && $_SESSION["typeOfUser"] == 'S'): ?>
+        <h3>My items on sale:</h3>
+        <?php
+        foreach ($items as $item):
+            if ($_SESSION["username"] == $item["author"]): ?>
+        <li><a href="<?= BASE_URL . "items/" . $item["id"] ?>"><?= $item["author"] ?>: 
+        	<?= $item["title"] ?> </a></li>
+        <?php endif; ?>
+    <?php endforeach; endif;?>
 
 </ul>

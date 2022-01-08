@@ -47,6 +47,7 @@ CREATE TABLE users (
     numberAddress INT,
     postNumber INT,
     typeOfUser VARCHAR(20) NOT NULL,
+    active BOOLEAN NOT NULL DEFAULT TRUE,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
