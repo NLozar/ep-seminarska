@@ -80,23 +80,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
     }
     
-    if(empty(trim($_POST["typeOfUser"]))){
-        $typeOfUser_err = "Please enter 'B' or 'S'";     
-    } elseif (trim($_POST["typeOfUser"]) == 'B' || trim($_POST["typeOfUser"]) == 'S'){
-        $typeOfUser = trim($_POST["typeOfUser"]);
-    }
-    else {
-        $typeOfUser_err = "Only 'B' or 'S'";
-    }
-    if(empty(trim($_POST["streetAddress"])) && $typeOfUser=='B'){
+    
+    if(empty(trim($_POST["streetAddress"]))){
         $streetAddress_err = "Please enter your address";
     }
     else $streetAddress = trim($_POST["streetAddress"]);
-    if(empty(trim($_POST["numberAddress"])) && $typeOfUser=='B'){
+    if(empty(trim($_POST["numberAddress"]))){
         $streetAddress_err = "Please enter your address";
     }
     else $numberAddress = trim($_POST["numberAddress"]);
-    if(empty(trim($_POST["postNumber"])) && $typeOfUser=='B'){
+    if(empty(trim($_POST["postNumber"]))){
         $streetAddress_err = "Please enter your address";
     }
     else $postNumber = trim($_POST["postNumber"]);
@@ -113,7 +106,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             // Set parameters
             $param_username = $username;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
-            $param_typeOfUser = $typeOfUser;
+            $param_typeOfUser = 'B';
             $param_streetAddress = $streetAddress;
             $param_numberAddress = $numberAddress;
             $param_postNumber = $postNumber;
@@ -165,12 +158,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <label>Confirm Password</label>
                 <input type="password" name="confirm_password" class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $confirm_password; ?>">
                 <span class="invalid-feedback"><?php echo $confirm_password_err; ?></span>
-            </div>
-            <div class="form-group">
-                <label>Buyer or seller?</label>
-                <input type="text" name="typeOfUser" placeholder ="'B' or 'S'" class="form-control <?php echo (!empty($typeOfUser_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $typeOfUser; ?>">
-                <span class="invalid-feedback"><?php echo $typeOfUser_err; ?></span>
-            </div>
+            </div
             <div class="form-group">
                 <label>Address and post number</label>
                 <input type="text" name="streetAddress" placeholder ="Street" class="form-control <?php echo (!empty($streetAdress_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $streetAddress; ?>">
