@@ -7,7 +7,7 @@
 <h1>All items</h1>
 <?php
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-    echo "<a href=\"logout\">Log out</a>";
+    echo "<a href=\"../logout\">Log out</a>";
 }
 else {
     echo "<a href=\"login\">Log in</a>";

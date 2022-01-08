@@ -5,11 +5,20 @@
 <title>Item detail</title>
 
 <h1>Details of: <?= $title ?></h1>
-
-<p>[
-    <a href="<?= BASE_URL . "items" ?>">All items</a> |
-    <a href="<?= BASE_URL . "items/add" ?>">Add new</a>
-    ]</p>
+<?php
+if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+    echo "[";
+    echo "<a href=\"./add\">Add new</a>";
+    echo " | ";
+    echo "<a href=\".\">All items</a>";
+    echo "]";
+}
+else {
+    echo "[";
+    echo "<a href=\".\">All items</a>";
+    echo "]";
+}
+?>
 
 <ul>
     <li>Author: <b><?= $author ?></b></li>
@@ -18,5 +27,14 @@
     <li>Description: <i><?= $description ?></i></li>
 </ul>
 
-<p>[ <a href="<?= BASE_URL . "items/edit/" . $id ?>">Edit</a> |
-    <a href="<?= BASE_URL . "items" ?>">Item index</a> ]</p>
+<?php
+if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+    echo "[";
+    echo "<a href=\"./edit\">Edit item</a>";
+    echo "]";
+}
+
+?>
+
+
+
