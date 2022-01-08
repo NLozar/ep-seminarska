@@ -5,8 +5,8 @@ require_once 'model/AbstractDB.php';
 
  
 // Define variables and initialize with empty values
-$username = $password = $confirm_password = $typeOfUser = "";
-$username_err = $password_err = $confirm_password_err = $typeOfUser_err= "";
+$username = $password = $confirm_password = $typeOfUser = $streetAddress = $numberAddress = $postNumber = "";
+$username_err = $password_err = $confirm_password_err = $typeOfUser_err= $streetAddress_err =  "";
 
 /* Database credentials. Assuming you are running MySQL
 server with default setting (user 'root' with no password) */
@@ -88,21 +88,35 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     else {
         $typeOfUser_err = "Only 'B' or 'S'";
     }
-    
+    if(empty(trim($_POST["streetAddress"])) && $typeOfUser=='B'){
+        $streetAddress_err = "Please enter your address";
+    }
+    else $streetAddress = trim($_POST["streetAddress"]);
+    if(empty(trim($_POST["numberAddress"])) && $typeOfUser=='B'){
+        $streetAddress_err = "Please enter your address";
+    }
+    else $numberAddress = trim($_POST["numberAddress"]);
+    if(empty(trim($_POST["postNumber"])) && $typeOfUser=='B'){
+        $streetAddress_err = "Please enter your address";
+    }
+    else $postNumber = trim($_POST["postNumber"]);
     // Check input errors before inserting in database
-    if(empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($typeOfUser_err)){
+    if(empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($typeOfUser_err) && empty($streetAddress_err)){
         
         // Prepare an insert statement
-        $sql = "INSERT INTO users (username, password, typeOfUser) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO users (username, password, typeOfUser, streetAddress, numberAddress, postNumber) VALUES (?, ?, ?, ?, ?,?)";
          
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_password, $param_typeOfUser);
+            mysqli_stmt_bind_param($stmt, "ssssdd", $param_username, $param_password, $param_typeOfUser, $param_streetAddress, $param_numberAddress, $param_postNumber);
             
             // Set parameters
             $param_username = $username;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
             $param_typeOfUser = $typeOfUser;
+            $param_streetAddress = $streetAddress;
+            $param_numberAddress = $numberAddress;
+            $param_postNumber = $postNumber;
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 // Redirect to login page
@@ -154,8 +168,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
             <div class="form-group">
                 <label>Buyer or seller?</label>
-                <input type="text" name="typeOfUser" class="form-control <?php echo (!empty($typeOfUser_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $typeOfUser; ?>">
+                <input type="text" name="typeOfUser" placeholder ="'B' or 'S'" class="form-control <?php echo (!empty($typeOfUser_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $typeOfUser; ?>">
                 <span class="invalid-feedback"><?php echo $typeOfUser_err; ?></span>
+            </div>
+            <div class="form-group">
+                <label>Address and post number</label>
+                <input type="text" name="streetAddress" placeholder ="Street" class="form-control <?php echo (!empty($streetAdress_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $streetAddress; ?>">
+                <input type="text" name="numberAddress" placeholder ="House number" class="form-control <?php echo (!empty($streetAddress_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $numberAddress; ?>">
+                <input type="text" name="postNumber" placeholder = "Post number" class="form-control <?php echo (!empty($streetAddress_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $postNumber; ?>">
+                <span class="invalid-feedback"><?php echo $streetAddress_err; ?></span>
+                
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Submit">
