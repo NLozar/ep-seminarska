@@ -13,6 +13,15 @@ class ItemController {
         echo ViewHelper::render ("view/login.php");
     }
     
+    public static function logout() {
+        $_SESSION["loggedin"] = false;
+        unset($_SESSION["loggedin"]);
+        session_destroy();
+        header("location: items");
+        echo ViewHelper::render("view/item-list.php", ["items" => StoreDB::getAll()]);
+    }
+
+
     public static function get($id) {
         echo ViewHelper::render("view/item-detail.php", StoreDB::get(["id" => $id]));
     }

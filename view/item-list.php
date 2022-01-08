@@ -5,11 +5,21 @@
 <title>Store</title>
 
 <h1>All items</h1>
+<?php
+if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+    echo "<a href=\"logout\">Log out</a>";
+}
+else {
+    echo "<a href=\"login\">Log in</a>";
+}
+?>
 
-<p>[
-<a href="<?= BASE_URL . "items" ?>">All items</a> |
-<a href="<?= BASE_URL . "items/add" ?>">Add new</a>
-]</p>
+<?php
+if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+    #url_base = rtrim($_SERVER["SCRIPT_NAME"]);
+    echo "<br><a href=\"items/add\">Add new</a>";
+}
+?>
 
 <ul>
 
