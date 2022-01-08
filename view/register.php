@@ -5,8 +5,8 @@ require_once 'model/AbstractDB.php';
 
  
 // Define variables and initialize with empty values
-$username = $password = $confirm_password = "";
-$username_err = $password_err = $confirm_password_err = "";
+$username = $password = $confirm_password = $typeOfUser = "";
+$username_err = $password_err = $confirm_password_err = $typeOfUser_err= "";
 
 /* Database credentials. Assuming you are running MySQL
 server with default setting (user 'root' with no password) */
@@ -80,20 +80,29 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         }
     }
     
+    if(empty(trim($_POST["typeOfUser"]))){
+        $typeOfUser_err = "Please enter 'B' or 'S'";     
+    } elseif (trim($_POST["typeOfUser"]) == 'B' || trim($_POST["typeOfUser"]) == 'S'){
+        $typeOfUser = trim($_POST["typeOfUser"]);
+    }
+    else {
+        $typeOfUser_err = "Only 'B' or 'S'";
+    }
+    
     // Check input errors before inserting in database
-    if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
+    if(empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($typeOfUser_err)){
         
         // Prepare an insert statement
-        $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
+        $sql = "INSERT INTO users (username, password, typeOfUser) VALUES (?, ?, ?)";
          
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
+            mysqli_stmt_bind_param($stmt, "sss", $param_username, $param_password, $param_typeOfUser);
             
             // Set parameters
             $param_username = $username;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
-            
+            $param_typeOfUser = $typeOfUser;
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
                 // Redirect to login page
@@ -142,6 +151,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <label>Confirm Password</label>
                 <input type="password" name="confirm_password" class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $confirm_password; ?>">
                 <span class="invalid-feedback"><?php echo $confirm_password_err; ?></span>
+            </div>
+            <div class="form-group">
+                <label>Buyer or seller?</label>
+                <input type="text" name="typeOfUser" class="form-control <?php echo (!empty($typeOfUser_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $typeOfUser; ?>">
+                <span class="invalid-feedback"><?php echo $typeOfUser_err; ?></span>
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Submit">
