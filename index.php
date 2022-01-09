@@ -95,6 +95,19 @@ $urls = [
             ItemController::index();
         }
     },
+    /*"/^items/addtocart\/(\d+)$/" => function ($method, $id) {
+        if (isset($_SESSION["loggedin"]) && $_SESSION["typeOfUser"] == 'B') {
+            if (isset($_SESSION["cart"][$id])) {
+                $_SESSION["cart"][$id]++;
+            }
+            else {
+                $_SESSION["cart"][$id] = 1;
+            }
+        }
+        else {
+            ItemController::index();
+        }
+    },*/
     "/^items\/(\d+)\/(foo|bar|baz)\/(\d+)$/" => function ($method, $id, $val, $num) {
         // primer kako definirati funkcijo, ki vzame dodatne parametre
         // http://localhost/netbeans/mvc-rest/books/1/foo/10

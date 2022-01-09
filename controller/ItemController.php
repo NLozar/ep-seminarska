@@ -25,6 +25,10 @@ class ItemController {
     public static function get($id) {
         echo ViewHelper::render("view/item-detail.php", StoreDB::get(["id" => $id]));
     }
+    
+    public static function getItemDataById($id) {
+        return StoreDB::get($id);
+    }
 
     public static function index() {
         echo ViewHelper::render("view/item-list.php", [

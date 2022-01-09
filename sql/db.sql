@@ -52,6 +52,14 @@ CREATE TABLE users (
     create_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE purchaseHistory (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    author varchar(255) COLLATE utf8_slovenian_ci NOT NULL,
+    title varchar(255) COLLATE utf8_slovenian_ci NOT NULL,
+    stanje varchar(255) COLLATE utf8_slovenian_ci NOT NULL DEFAULT 'neobdelano',
+    buyerId INT NOT NULL
+);
+
 LOCK TABLES `item` WRITE;
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
 INSERT INTO `item` VALUES 

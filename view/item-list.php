@@ -1,3 +1,5 @@
+<?php 
+#require_once '../controller/ItemController.php';?>
 <!DOCTYPE html>
 
 <link rel="stylesheet" type="text/css" href="<?= CSS_URL . "style.css" ?>">
@@ -54,6 +56,8 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && $_SESSION[
 
 </ul>
 
+
+<!--<?php/* if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && $_SESSION["typeOfUser"] == 'B'):?>
 <div class="cart">
     <h3>Košarica</h3>
     <p><?php
@@ -63,11 +67,11 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && $_SESSION[
     <?php foreach ($_SESSION["cart"] as $id => $quantity):?>
         <form action="<?= $url ?>" method="post">
             <?php if ($quantity != 0) {
-                $knjiga = BazaKnjig::vrniKnjigo($id)?>
-            <?= $knjiga->avtor ?>: <?= $knjiga->naslov ?>(<?=number_format($knjiga->cena, 2) ?> EUR)
-            <p><?=$knjiga->cena * $quantity?></p>
+                $item = ItemController::getItemDataById($id)?>
+            <?= $item["author"]?>: <?= $item["title"]?>(<?=number_format($item["price"], 2) ?> EUR)
+            <p><?=$item["price"] * $quantity?></p>
             <input type="hidden" name="do" value="update"/>
-            <input type="hidden" name="id" value="<?= $knjiga->id ?>"/>
+            <input type="hidden" name="id" value="<?= $item["id"] ?>"/>
             <input type="number" name="quantity" min="0" step="1" value="<?=$quantity?>"/>
             <button type="submit">Update</button>
             <?php } ?>
@@ -84,3 +88,4 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && $_SESSION[
     }            
     ?></p>
 </div>
+<?php# endif; ?>*/
