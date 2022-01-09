@@ -6,7 +6,7 @@
 
 <h1>Details of: <?= $title ?></h1>
 <?php
-if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && $_SESSION["typeOfUser"] == 'S') {
     echo "[";
     echo "<a href=\"./add\">Add new</a>";
     echo " | ";

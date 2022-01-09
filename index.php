@@ -58,24 +58,41 @@ $urls = [
                 ItemController::sellerEdit($id);
             }
         }
+        else {
+            ItemController::index();
+        }
     },
     "/^items\/add$/" => function ($method) {
-        if ($method == "POST") {
-            ItemController::add();
+        if (isset($_SESSION["loggedin"]) && $_SESSION["typeOfUser"] == 'S') {
+            if ($method == "POST") {
+                ItemController::add();
+            } else {
+                ItemController::addForm();
+            }
         } else {
-            ItemController::addForm();
+            ItemController::index();
         }
     },
     "/^items\/edit\/(\d+)$/" => function ($method, $id) {
-        if ($method == "POST") {
-            ItemController::edit($id);
-        } else {
-            ItemController::editForm($id);
+        if (isset($_SESSION["loggedin"]) && $_SESSION["typeOfUser"] == 'S') {
+            if ($method == "POST") {
+                ItemController::edit($id);
+            } else {
+                ItemController::editForm($id);
+            }
+        }
+        else {
+            ItemController::index();
         }
     },
     "/^items\/delete\/(\d+)$/" => function ($method, $id) {
-        if ($method == "POST") {
-            ItemController::delete($id);
+        if (isset($_SESSION["loggedin"]) && $_SESSION["typeOfUser"] == 'S') {
+            if ($method == "POST") {
+                ItemController::delete($id);
+            }
+        }
+        else {
+            ItemController::index();
         }
     },
     "/^items\/(\d+)\/(foo|bar|baz)\/(\d+)$/" => function ($method, $id, $val, $num) {
