@@ -28,6 +28,11 @@ $urls = [
     "/^items\/(\d+)$/" => function ($method, $id) {
         ItemController::get($id);
     },
+    "/^profile$/" => function ($mehtod) {
+        if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+            ItemController::profile($_SESSION["id"]);
+        }
+    },
     "/^admin$/" => function ($method) {
         if (isset($_SESSION["loggedin"]) && $_SESSION["typeOfUser"] == 'A') {
             ItemController::getAllUsers();

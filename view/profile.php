@@ -9,17 +9,19 @@ $pass = ""
 <meta charset="UTF-8" />
 <title>Profile</title>
 
-<p>Edit your information</p>
 <p>[<a href="<?= BASE_URL . "items" ?>">All Items</a>]</p>
+<p>Edit your information</p>
 
 <form action="<?= BASE_URL . "profile"?>" method="post">
-    <p><label>User name: <input type="text" name="username" value="<?= $username ?>" autofocus/></label></p>
-    <p><label>Password: <input type="password" name="title" value="<?= $pass ?>"/></label></p>
+    <p><label>New user name: <input type="text" name="username" value="<?= $username ?>" autofocus/></label></p>
+    <p><label>New password: <input type="password" name="title" value="<?= $pass ?>"/></label></p>
 </form>
 
 <?php
 if ($_SESSION["typeOfUser"] == 'B'):?>
 <form>
-    <p><label>House number: <input type="text" name="username" value="<?= $username ?>" autofocus/></label></p>
+    <p><label>Street: <input type="text" name="username" value="<?= $data[0]["streetAddress"] ?>" autofocus/></label></p>
+    <p><label>House number: <input type="text" name="username" value="<?= $data[0]["numberAddress"] ?>" autofocus/></label></p>
+    <p><label>Post number: <input type="text" name="username" value="<?= $data[0]["postNumber"]?>" autofocus/></label></p>
 </form>
 <?php endif;

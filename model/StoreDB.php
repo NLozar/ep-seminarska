@@ -47,4 +47,8 @@ class StoreDB extends AbstractDB {
     public static function getAllUsers() {
         return parent::query("SELECT * FROM users");
     }
+    
+    public static function getUserData($id) {
+        return parent::query("SELECT * FROM users WHERE id = $id");
+    }
 }

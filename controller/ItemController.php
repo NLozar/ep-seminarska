@@ -91,7 +91,11 @@ class ItemController {
         ViewHelper::redirect($url);
     }
     
-    public static function getAllUsers() {
+    public static function profile($id) {
+        echo ViewHelper::render("view/profile.php", ["data" => StoreDB::getUserData($id)]);
+    }
+
+        public static function getAllUsers() {
         echo ViewHelper::render("view/admin-view.php", ["users" => StoreDB::getAllUsers()]);
     }
     /**
