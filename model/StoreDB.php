@@ -48,7 +48,24 @@ class StoreDB extends AbstractDB {
         return parent::query("SELECT * FROM users");
     }
     
-    public static function getUserData($id) {
+    public static function getUserDataById($id) {
         return parent::query("SELECT * FROM users WHERE id = $id");
+    }
+    
+    public static function editSeller(array $data) {
+        #return parent::modify("UPDATE users SET username = :username, password = :password, active = :active WHERE id = :id", $data);
+        $link = mysqli_connect("localhost", "root", "ep", "onlinestore");
+        $username = mysqli_real_escape_string($link, $_POST["username"]);
+        $password = mysqli_real_escape_string($link, password_hash($_POST["password"], PASSWORD_DEFAULT));
+        $active = mysqli_real_escape_string($link, $_POST["active"]);
+        $id = $_POST["id"];
+        $sql = "UPDATE users SET username = ?, password = ?, active = ? where id = ?;";
+        $stmt = mysqli_stmt_init($link);
+        if (!mysqli_stmt_prepare($stmt, $sql)) {
+            throw new Exception("SQL error.");
+        } else {
+            mysqli_stmt_bind_param($stmt, "ssdd", $username, $password, $active, $id);
+            mysqli_stmt_execute($stmt);
+        }
     }
 }

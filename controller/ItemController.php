@@ -92,12 +92,27 @@ class ItemController {
     }
     
     public static function profile($id) {
-        echo ViewHelper::render("view/profile.php", ["data" => StoreDB::getUserData($id)]);
+        echo ViewHelper::render("view/profile.php", ["data" => StoreDB::getUserDataById($id)]);
     }
 
-        public static function getAllUsers() {
+        public static function adminView() {
         echo ViewHelper::render("view/admin-view.php", ["users" => StoreDB::getAllUsers()]);
     }
+    
+    public static function sellerEdit($id) {
+        echo ViewHelper::render("view/edit-seller.php", ["data" => StoreDB::getUserDataById($id)]);
+    }
+    
+    public static function editSellerForm($id) {
+        $data["id"] = $id;
+        $data["username"] = filter_input(FILTER_SANITIZE_FULL_SPECIAL_CHARS, $_POST["username"]);
+        $data["password"] = password_hash(filter_input(FILTER_SANITIZE_FULL_SPECIAL_CHARS, $_POST["password"]), PASSWORD_DEFAULT);
+        $data["active"] = $_POST["active"];
+        StoreDB::editSeller($data);
+        $url = BASE_URL . "admin";
+        ViewHelper::redirect($url);
+    }
+
     /**
      * Returns TRUE if given $input array contains no FALSE values
      * @param type $input
@@ -128,5 +143,13 @@ class ItemController {
             'price' => FILTER_VALIDATE_FLOAT,
         ];
     }
-
+    
+    public static function userRules() {
+        return [
+            "username" => FILTER_SANITIZE_SPECIAL_CHARS,
+            "password" => FILTER_SANITIZE_SPECIAL_CHARS,
+            "active" => FILTER_SANITIZE_SPECIAL_CHARS,
+            "id" => FILTER_SANITIZE_SPECIAL_CHARS
+        ];
+    }
 }

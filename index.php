@@ -35,10 +35,20 @@ $urls = [
     },
     "/^admin$/" => function ($method) {
         if (isset($_SESSION["loggedin"]) && $_SESSION["typeOfUser"] == 'A') {
-            ItemController::getAllUsers();
+            ItemController::adminView();
         }
         else {
             ItemController::index();
+        }
+    },
+    "/^sellerEdit\/(\d+)$/" => function ($method, $id) {
+        if (isset($_SESSION["loggedin"]) && $_SESSION["typeOfUser"] == 'A') {
+            if ($method == "POST") {
+                ItemController::editSellerForm($id);
+            }
+            else {
+                ItemController::sellerEdit($id);
+            }
         }
     },
     "/^items\/add$/" => function ($method) {

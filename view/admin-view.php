@@ -20,7 +20,7 @@ else {
     <?php
     foreach ($users as $user): ?>
         <?php if ($user["typeOfUser"] == 'S'): ?>
-        <li><?= $user["username"] ?></li>
+        <li><a href="sellerEdit/<?=$user["id"]?>"><?= $user["username"] ?></a></li>
     <?php endif; endforeach;?>
    
 </ul>
