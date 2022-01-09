@@ -2,9 +2,9 @@
 
 <link rel="stylesheet" type="text/css" href="<?= CSS_URL . "style.css" ?>">
 <meta charset="UTF-8" />
-<title>Store</title>
+<title>Admin</title>
 
-<h1>All users</h1>
+
 <?php
 $base_url = BASE_URL;
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
@@ -14,19 +14,24 @@ else {
     echo "<a href=\"$base_url/login\">Log in</a>";
 }
 ?>
-
-<?php
-if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-    #url_base = rtrim($_SERVER["SCRIPT_NAME"]);
-    echo "<br><a href=\"$base_url/items/add\">Add new</a>";
-}
-?>
+<h3>All sellers</h3>
 
 <ul>
     <?php
     foreach ($users as $user): ?>
+        <?php if ($user["typeOfUser"] == 'S'): ?>
         <li><?= $user["username"] ?></li>
-    <?php endforeach;?>
+    <?php endif; endforeach;?>
+   
+</ul>
+<h3>All buyers</h3>
+
+<ul>
+    <?php
+    foreach ($users as $user): ?>
+        <?php if ($user["typeOfUser"] == 'B'): ?>
+        <li><?= $user["username"] ?></li>
+    <?php endif; endforeach;?>
    
 </ul>
 
@@ -153,7 +158,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 </head>
 <body>
     <div class="wrapper">
-        <h2>Sign Up</h2>
+        <h2>Add new seller</h2>
         <p>Please fill this form to create an account.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group">
