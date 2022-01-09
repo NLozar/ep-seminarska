@@ -94,6 +94,22 @@ class ItemController {
     public static function profile($id) {
         echo ViewHelper::render("view/profile.php", ["data" => StoreDB::getUserDataById($id)]);
     }
+    
+    public static function updateProfile($id) {
+        $data["id"] = $id;
+        $data["username"] = filter_input(FILTER_SANITIZE_FULL_SPECIAL_CHARS, $_POST["username"]);
+        $data["password"] = password_hash(filter_input(FILTER_SANITIZE_FULL_SPECIAL_CHARS, $_POST["password"]), PASSWORD_DEFAULT);
+        if ($_SESSION["typeOfUser"] == 'B') {
+            $data["streetAddress"] = filter_input(FILTER_SANITIZE_FULL_SPECIAL_CHARS, $_POST["streetAddress"]);
+            $data["numberAddress"] = filter_input(FILTER_SANITIZE_FULL_SPECIAL_CHARS, $_POST["numberAddress"]);
+            $data["postNumber"] = filter_input(FILTER_SANITIZE_FULL_SPECIAL_CHARS, $_POST["postNumber"]);
+        }
+        StoreDB::editProfile($data);
+        $_SESSION["username"] = $data["username"];
+        $url = BASE_URL . "items";
+        ViewHelper::redirect($url);
+        #echo "update command recieved";
+    }
 
         public static function adminView() {
         echo ViewHelper::render("view/admin-view.php", ["users" => StoreDB::getAllUsers()]);

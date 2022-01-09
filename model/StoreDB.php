@@ -68,4 +68,46 @@ class StoreDB extends AbstractDB {
             mysqli_stmt_execute($stmt);
         }
     }
+    
+    public static function editProfile(array $data) {
+        $link = mysqli_connect("localhost", "root", "ep", "onlinestore");
+        $username = mysqli_real_escape_string($link, $_POST["username"]);
+        $password = mysqli_real_escape_string($link, password_hash($_POST["password"], PASSWORD_DEFAULT));
+        $id = $_POST["id"];
+        if ($_SESSION["typeOfUser"] == 'B') {
+            $streetAddress = mysqli_real_escape_string($link, $_POST["streetAddress"]);
+            $numberAddress = mysqli_real_escape_string($link, $_POST["numberAddress"]);
+            $postNumber = mysqli_real_escape_string($link, $_POST["postNumber"]);
+            $sql = "UPDATE users SET username = ?, password = ?, streetAddress = ?, numberAddress = ?, postNumber = ? WHERE id = ?;";
+            $stmt = mysqli_stmt_init($link);
+            if (!mysqli_stmt_prepare($stmt, $sql)) {
+                throw new Exception("SQL error.");
+            } else {
+                mysqli_stmt_bind_param($stmt, "sssddd", $username, $password, $streetAddress, $numberAddress, $postNumber, $id);
+                mysqli_stmt_execute($stmt);
+            }
+        } else {
+            self::updateItemsAuthorUsername($_SESSION["username"], $username);
+            $sql = "UPDATE users SET username = ?, password = ? WHERE id = ?;";
+            $stmt = mysqli_stmt_init($link);
+            if (!mysqli_stmt_prepare($stmt, $sql)) {
+                throw new Exception("SQL error.");
+            } else {
+                mysqli_stmt_bind_param($stmt, "ssd", $username, $password, $id);
+                mysqli_stmt_execute($stmt);
+            }
+        }
+    }
+    
+    public static function updateItemsAuthorUsername($old, $new) {
+        $link = mysqli_connect("localhost", "root", "ep", "onlinestore");
+        $sql = "UPDATE item SET author = REPLACE(author, ?, ?);";
+        $stmt = mysqli_stmt_init($link);
+        if (!mysqli_stmt_prepare($stmt, $sql)) {
+            throw new Exception("SQL error.");
+        } else {
+            mysqli_stmt_bind_param($stmt, "ss", $old, $new);
+            mysqli_stmt_execute($stmt);
+        }
+    }
 }

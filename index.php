@@ -30,7 +30,15 @@ $urls = [
     },
     "/^profile$/" => function ($mehtod) {
         if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-            ItemController::profile($_SESSION["id"]);
+            if ($mehtod == "POST") {
+                ItemController::updateProfile($_SESSION["id"]);
+            }
+            else {
+                ItemController::profile($_SESSION["id"]);
+            }
+        }
+        else {
+            ItemController::index();
         }
     },
     "/^admin$/" => function ($method) {
