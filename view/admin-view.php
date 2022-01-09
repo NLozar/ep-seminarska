@@ -8,7 +8,9 @@
 <?php
 $base_url = BASE_URL;
 if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
-    echo "<a href=\"$base_url/logout\">Log out</a>";
+    $uname = $_SESSION["username"];
+    echo "<a href=\"$base_url/logout\">Log out</a><br>"
+            . "<a href=\"$base_url/profile\">$uname</a>";
 }
 else {
     echo "<a href=\"$base_url/login\">Log in</a>";
@@ -20,7 +22,9 @@ else {
     <?php
     foreach ($users as $user): ?>
         <?php if ($user["typeOfUser"] == 'S'): ?>
-        <li><a href="sellerEdit/<?=$user["id"]?>"><?= $user["username"] ?></a></li>
+        <li><a href="sellerEdit/<?=$user["id"]?>"><?= $user["username"] ?></a>
+            <?php if (!$user["active"]):?>(deactivated)<?php endif; ?>
+        </li>
     <?php endif; endforeach;?>
    
 </ul>

@@ -107,7 +107,13 @@ class ItemController {
         }
         StoreDB::editProfile($data);
         $_SESSION["username"] = $data["username"];
-        $url = BASE_URL . "items";
+        $url = "";
+        if ($_SESSION["typeOfUser"] == 'A') {
+            $url = BASE_URL . "admin";
+        }
+        else {
+            $url = BASE_URL . "items";
+        }
         ViewHelper::redirect($url);
         #echo "update command recieved";
     }

@@ -11,7 +11,7 @@
 <form action="<?= BASE_URL . "sellerEdit/" . $data[0]["id"] ?>" method="post">
     <input type="hidden" name="id" value="<?= $data[0]["id"]?>">
     <p><label>Username: <input type="text" name="username" value="<?= $data[0]["username"]?>" autofocus/></label></p>
-    <p><label>Password: <input type="password" name="password" value="" /></label></p>
+    <p><label>Password (!DO NOT LEAVE BLANK, otherwise seller won't be able to log in!): <input type="password" name="password" value="" /></label></p>
     <p><label>active: <input type="text" name="active" value="<?= $data[0]["active"] ?>"></input></label></p>
     <p><button>Update record</button></p>
 </form>

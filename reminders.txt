@@ -1,0 +1,1 @@
+- pr editSeller in profile -> preverjanje da password filed ni prazen

@@ -60,6 +60,14 @@ INSERT INTO `item` VALUES
 
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 UNLOCK TABLES;
+
+LOCK TABLES users WRITE;
+INSERT INTO users (id, username, password, streetAddress, numberAddress, postNumber, typeOfUser) VALUES 
+(1, 'admin', '$2y$10$pQ16KMLowRNAb4lJL.z4DuFfXK.CwWWl9NND.Pch2MX.U6F6.B3fW', NULL, NULL, NULL, 'A'),
+(2, 'seller', '$2y$10$vp5c8pMZrfBE0PJxLbei.uMQKmkBj.i/2ifesQzS91r1L8EunA8vS', NULL, NULL, NULL, 'S'),
+(3, 'buyer', '$2y$10$JsASP5MPO0eDbfoSsknvSOSnndsz4FQcD3CDFAIKNyPYr78a6nyhq', 'somestreet', '5', 1000, 'B');
+UNLOCK TABLES;
+
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

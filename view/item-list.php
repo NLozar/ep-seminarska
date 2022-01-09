@@ -18,8 +18,7 @@ else {
 ?>
 
 <?php
-if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true ) {
-    #url_base = rtrim($_SERVER["SCRIPT_NAME"]);
+if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true && $_SESSION["typeOfUser"] == 'S') {
     echo "<br><a href=\"$base_url/items/add\">Add new</a>";
 }
 ?>
@@ -47,7 +46,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true ) {
                 if ($item["active"] == 0):?>
                 <li><a href="<?= BASE_URL . "items/" . $item["id"] ?>"><?= $item["author"] ?>:
         	
-                <?= $item["title"] ?> </a><p> (deactivated)</p> </li> 
+                <?= $item["title"] ?> </a>(deactivated)</li>
                 <?php endif;
                  endif; ?>
     <?php endforeach; endif;?>
