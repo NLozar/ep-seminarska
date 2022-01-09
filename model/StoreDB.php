@@ -52,9 +52,15 @@ class StoreDB extends AbstractDB {
                         . " ORDER BY id ASC");
     }
 
-    public static function getAllwithURI(array $prefix) {
+    /*public static function getAllwithURI(array $prefix) {
         return parent::query("SELECT id, author, title, price"
                         . "          CONCAT(:prefix, id) as uri "
+                        . "FROM item "
+                        . "ORDER BY id ASC", $prefix);
+    }*/
+    
+    public static function getAllwithURI(array $prefix) {
+        return parent::query("SELECT *"
                         . "FROM item "
                         . "ORDER BY id ASC", $prefix);
     }
