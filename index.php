@@ -28,6 +28,14 @@ $urls = [
     "/^items\/(\d+)$/" => function ($method, $id) {
         ItemController::get($id);
     },
+    "/^admin$/" => function ($method) {
+        if (isset($_SESSION["loggedin"]) && $_SESSION["typeOfUser"] == 'A') {
+            ItemController::getAllUsers();
+        }
+        else {
+            ItemController::index();
+        }
+    },
     "/^items\/add$/" => function ($method) {
         if ($method == "POST") {
             ItemController::add();

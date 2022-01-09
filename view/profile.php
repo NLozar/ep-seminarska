@@ -16,3 +16,10 @@ $pass = ""
     <p><label>User name: <input type="text" name="username" value="<?= $username ?>" autofocus/></label></p>
     <p><label>Password: <input type="password" name="title" value="<?= $pass ?>"/></label></p>
 </form>
+
+<?php
+if ($_SESSION["typeOfUser"] == 'B'):?>
+<form>
+    <p><label>House number: <input type="text" name="username" value="<?= $username ?>" autofocus/></label></p>
+</form>
+<?php endif;

@@ -44,4 +44,7 @@ class StoreDB extends AbstractDB {
                         . "ORDER BY id ASC", $prefix);
     }
 
+    public static function getAllUsers() {
+        return parent::query("SELECT * FROM users");
+    }
 }

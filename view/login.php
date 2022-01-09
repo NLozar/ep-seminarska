@@ -84,7 +84,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["typeOfUser"] = $typeOfUser;
                             
                             // Redirect user to welcome page
-                            header("location: items");
+                            if ($typeOfUser == 'A') {
+                                header("location: admin");
+                            }
+                            else {
+                                header("location: items");
+                            }
                         } else{
                             // Password is not valid, display a generic error message
                             $login_err = "Invalid username or password.";

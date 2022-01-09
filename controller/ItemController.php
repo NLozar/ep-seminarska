@@ -90,7 +90,10 @@ class ItemController {
 
         ViewHelper::redirect($url);
     }
-
+    
+    public static function getAllUsers() {
+        echo ViewHelper::render("view/admin-view.php", ["users" => StoreDB::getAllUsers()]);
+    }
     /**
      * Returns TRUE if given $input array contains no FALSE values
      * @param type $input
