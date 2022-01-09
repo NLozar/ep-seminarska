@@ -3,6 +3,10 @@
 // Include config file
 require_once 'model/AbstractDB.php';
 
+if (!isset($_SERVER["HTTPS"])) {
+    $base_url = BASE_URL;
+    header("location: https://" . $_SERVER["HTTP_HOST"] . $base_url . "/register");
+}
  
 // Define variables and initialize with empty values
 $username = $password = $confirm_password = $typeOfUser = $streetAddress = $numberAddress = $postNumber = "";

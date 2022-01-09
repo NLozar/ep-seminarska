@@ -15,7 +15,7 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
             . "<a href=\"$base_url/profile\">$uname</a>";
 }
 else {
-    echo "<a href=\"$base_url/login\">Log in</a>";
+    echo "<a href=\"https://" . $_SERVER["HTTP_HOST"] . $base_url . "/login\">Log in</a>";
 }
 ?>
 

@@ -21,6 +21,11 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
     header("location: items");
     exit;
 }
+
+if (!isset($_SERVER["HTTPS"])) {
+    $base_url = BASE_URL;
+    header("location: https://" . $_SERVER["HTTP_HOST"] . $base_url . "/login");
+}
  
 // Check connection
 if($link === false){
