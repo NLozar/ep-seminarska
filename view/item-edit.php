@@ -17,6 +17,8 @@
     <p><label>Title: <input type="text" name="title" value="<?= $title ?>" autofocus/></label></p>
     <p><label>Price: <input type="number" name="price" value="<?= $price ?>" /></label></p>
     <p><label>Description: <br/><textarea name="description" cols="70" rows="10"><?= $description ?></textarea></label></p>
+    <p><label>Active: <input type="number" name="active" value="<?= $active ?>" /></label></p>
+    
     <p><button>Update record</button></p>
 </form>
 

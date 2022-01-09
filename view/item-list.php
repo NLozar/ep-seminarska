@@ -18,7 +18,7 @@ else {
 ?>
 
 <?php
-if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true ) {
     #url_base = rtrim($_SERVER["SCRIPT_NAME"]);
     echo "<br><a href=\"$base_url/items/add\">Add new</a>";
 }
@@ -29,19 +29,27 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
     <?php
     if (!isset($_SESSION["loggedin"]) || $_SESSION["typeOfUser"] == 'B'):
     foreach ($items as $item): ?>
+        <?php if ($item["active"] == 1):?>
         <li><a href="<?= BASE_URL . "items/" . $item["id"] ?>"><?= $item["author"] ?>: 
         	<?= $item["title"] ?> </a></li>
-    <?php endforeach; endif;?>
+    <?php endif; endforeach; endif;?>
     
     <?php
     if (isset($_SESSION["loggedin"]) && $_SESSION["typeOfUser"] == 'S'): ?>
         <h3>My items on sale:</h3>
         <?php
         foreach ($items as $item):
-            if ($_SESSION["username"] == $item["author"]): ?>
-        <li><a href="<?= BASE_URL . "items/" . $item["id"] ?>"><?= $item["author"] ?>: 
+            if ($_SESSION["username"] == $item["author"]): 
+                if ($item["active"] == 1):?>
+                <li><a href="<?= BASE_URL . "items/" . $item["id"] ?>"><?= $item["author"] ?>: 
         	<?= $item["title"] ?> </a></li>
-        <?php endif; ?>
+                <?php endif;
+                if ($item["active"] == 0):?>
+                <li><a href="<?= BASE_URL . "items/" . $item["id"] ?>"><?= $item["author"] ?>:
+        	
+                <?= $item["title"] ?> </a><p> (deactivated)</p> </li> 
+                <?php endif;
+                 endif; ?>
     <?php endforeach; endif;?>
     
 

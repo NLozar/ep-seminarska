@@ -36,7 +36,8 @@ class ItemController {
         "author" => "",
         "title" => "",
         "price" => "",
-        "description" => ""
+        "description" => "",
+        "active" => 1
     ]) {
         echo ViewHelper::render("view/item-add.php", $values);
     }

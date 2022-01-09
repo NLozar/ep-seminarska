@@ -32,6 +32,7 @@ CREATE TABLE `item` (
   `title` varchar(255) COLLATE utf8_slovenian_ci NOT NULL,
   `description` text COLLATE utf8_slovenian_ci NOT NULL,
   `price` float NOT NULL,
+  active BOOLEAN NOT NULL DEFAULT TRUE, 
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -54,8 +55,8 @@ CREATE TABLE users (
 LOCK TABLES `item` WRITE;
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
 INSERT INTO `item` VALUES 
-(1,'Janez Novak','bas kitara','Delujoča, lepo ohranjena bas kitara',200),
-(2,'Jan Kovač','fotoaparat Canon','fotoaparat Canon, model 200d',450);
+(1,'Janez Novak','bas kitara','Delujoča, lepo ohranjena bas kitara',200,1),
+(2,'Jan Kovač','fotoaparat Canon','fotoaparat Canon, model 200d',450,1);
 
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 UNLOCK TABLES;

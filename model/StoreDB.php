@@ -10,9 +10,24 @@ class StoreDB extends AbstractDB {
     }
 
     public static function update(array $params) {
-        return parent::modify("UPDATE item SET author = :author, title = :title, "
-                        . "description = :description, price = :price"
-                        . " WHERE id = :id", $params);
+        #return parent::modify("UPDATE item SET author = :author, title = :title, "
+         #               . "description = :description, price = :price, active = :active"
+          #              . " WHERE id = :id", $params);
+        $link = mysqli_connect("localhost", "root", "ep", "onlinestore");
+        $author = mysqli_real_escape_string($link, $params["author"]);
+        $title = mysqli_real_escape_string($link, $params["title"]);
+        $description = mysqli_real_escape_string($link, $params["description"]);
+        $price = mysqli_real_escape_string($link, $params["price"]);
+        $active = mysqli_real_escape_string($link, $_POST["active"]);
+        $id = mysqli_real_escape_string($link, $params["id"]);
+        $sql = "UPDATE item SET author = ?, title = ?, description = ?, price = ?, active = ? where id = ?;";
+        $stmt = mysqli_stmt_init($link);
+        if (!mysqli_stmt_prepare($stmt, $sql)) {
+            throw new Exception("SQL error.");
+        } else {
+            mysqli_stmt_bind_param($stmt, "sssddd", $author, $title, $description, $price, $active, $id);
+            mysqli_stmt_execute($stmt);
+        }
     }
 
     public static function delete(array $id) {
@@ -20,7 +35,7 @@ class StoreDB extends AbstractDB {
     }
 
     public static function get(array $id) {
-        $items = parent::query("SELECT id, author, title, description, price"
+        $items = parent::query("SELECT id, author, title, description, price, active"
                         . " FROM item"
                         . " WHERE id = :id", $id);
 
@@ -32,7 +47,7 @@ class StoreDB extends AbstractDB {
     }
 
     public static function getAll() {
-        return parent::query("SELECT id, author, title, price, description"
+        return parent::query("SELECT id, author, title, price, description, active"
                         . " FROM item"
                         . " ORDER BY id ASC");
     }
