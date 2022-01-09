@@ -41,5 +41,6 @@ if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
         	<?= $item["title"] ?> </a></li>
         <?php endif; ?>
     <?php endforeach; endif;?>
+    
 
 </ul>
