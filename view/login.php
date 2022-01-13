@@ -79,18 +79,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     mysqli_stmt_bind_result($stmt, $id, $username, $hashed_password, $streetAddress, $numberAddress, $postNumber, $typeOfUser, $active, $created_at);
                     if(mysqli_stmt_fetch($stmt)){
                         if($active && password_verify($password, $hashed_password)){
-                            /*if ($typeOfUser == 'A' || $typeOfUser == 'S') {
+                            if ($typeOfUser == 'A' || $typeOfUser == 'S') {
                                 $authorized_users = ["admin", "seller"];
-                                $client_cert = filter_input(INPUT_SERVER, "SSL_CLINET_CERT");
+                                $client_cert = filter_input(INPUT_SERVER, "SSL_CLIENT_CERT");
                                 $cert_data = openssl_x509_parse($client_cert);
                                 #echo var_dump($client_cert);
                                 #exit;
                                 $commonname = $cert_data["subject"]["CN"];
                                 if (!in_array($commonname, $authorized_users)) {
-                                    echo "Get a certificate, intruder!";
+                                    echo "Get a certificate, intruder!\n";
                                     exit;
                                 }
-                            }*/
+                            }
                             // Password is correct, so start a new session
                             session_start();
                             

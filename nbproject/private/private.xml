@@ -13,10 +13,13 @@
             <file>file:/home/ep/NetBeansProjects/onlineStore/view/item-detail.php</file>
             <file>file:/home/ep/NetBeansProjects/onlineStore/view/edit-seller.php</file>
             <file>file:/home/ep/NetBeansProjects/onlineStore/view/admin-view.php</file>
+            <file>file:/home/ep/NetBeansProjects/onlineStore/ViewHelper.php</file>
             <file>file:/home/ep/NetBeansProjects/onlineStore/view/register.php</file>
             <file>file:/home/ep/NetBeansProjects/onlineStore/view/login.php</file>
             <file>file:/home/ep/NetBeansProjects/onlineStore/controller/ItemController.php</file>
+            <file>file:/home/ep/NetBeansProjects/onlineStore/controller/ItemRESTController.php</file>
             <file>file:/home/ep/NetBeansProjects/onlineStore/sql/db.sql</file>
+            <file>file:/home/ep/NetBeansProjects/onlineStore/.htaccess</file>
         </group>
     </open-files>
 </project-private>
