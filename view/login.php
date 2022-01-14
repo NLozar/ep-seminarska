@@ -80,14 +80,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                     if(mysqli_stmt_fetch($stmt)){
                         if($active && password_verify($password, $hashed_password)){
                             if ($typeOfUser == 'A' || $typeOfUser == 'S') {
-                                $authorized_users = ["admin", "seller"];
+                                $authorized_admins = ["admin"];
+                                $authorized_sellers = ["seller"];
+                                $client_cert = null;
                                 $client_cert = filter_input(INPUT_SERVER, "SSL_CLIENT_CERT");
+                                if ($client_cert == null) {
+                                    echo "You need a certificate.\n";
+                                    exit;
+                                }
                                 $cert_data = openssl_x509_parse($client_cert);
                                 #echo var_dump($client_cert);
                                 #exit;
                                 $commonname = $cert_data["subject"]["CN"];
-                                if (!in_array($commonname, $authorized_users)) {
-                                    echo "Get a certificate, intruder!\n";
+                                if ($typeOfUser == 'A' && !in_array($commonname, $authorized_admins)) {
+                                    echo "You need a different certificate.\n";
+                                    exit;
+                                }
+                                else if ($typeOfUser == 'S' && !in_array($commonname, $authorized_sellers)) {
+                                    echo "You need a different certificate.\n";
                                     exit;
                                 }
                             }

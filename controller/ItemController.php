@@ -121,8 +121,8 @@ class ItemController {
         ViewHelper::redirect($url);
         #echo "update command recieved";
     }
-
-        public static function adminView() {
+    
+    public static function adminView() {
         echo ViewHelper::render("view/admin-view.php", ["users" => StoreDB::getAllUsers()]);
     }
     
