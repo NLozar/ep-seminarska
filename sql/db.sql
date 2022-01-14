@@ -63,8 +63,8 @@ CREATE TABLE purchaseHistory (
 LOCK TABLES `item` WRITE;
 /*!40000 ALTER TABLE `item` DISABLE KEYS */;
 INSERT INTO `item` VALUES 
-(1,'Janez Novak','bas kitara','Delujoča, lepo ohranjena bas kitara',200,1),
-(2,'Jan Kovač','fotoaparat Canon','fotoaparat Canon, model 200d',450,1);
+(1,'seller','bas kitara','Delujoča, lepo ohranjena bas kitara',200,1),
+(2,'seller','fotoaparat Canon','fotoaparat Canon, model 200d',450,1);
 
 /*!40000 ALTER TABLE `item` ENABLE KEYS */;
 UNLOCK TABLES;
